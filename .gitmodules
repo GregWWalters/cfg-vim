@@ -43,3 +43,6 @@
 [submodule "rockstar"]
 	path = pack/filetype/opt/rockstar
 	url = ssh://git@github.com/sirosen/vim-rockstar.git
+[submodule "matchup"]
+	path = pack/user/start/matchup
+	url = git@github.com:andymass/vim-matchup.git
