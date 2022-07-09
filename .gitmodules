@@ -1,0 +1,45 @@
+[submodule "pandoc"]
+	path = pack/user/start/pandoc
+	url = ssh://git@github.com/vim-pandoc/vim-pandoc.git
+[submodule "editorconfig"]
+	path = pack/user/start/editorconfig
+	url = ssh://git@github.com/editorconfig/editorconfig-vim.git
+[submodule "commentary"]
+	path = pack/user/start/commentary
+	url = ssh://git@github.comtpope/vim-commentary.git
+[submodule "surround"]
+	path = pack/user/start/surround
+	url = ssh://git@github.comtpope/vim-surround.git
+[submodule "table-mode"]
+	path = pack/user/opt/table-mode
+	url = ssh://git@github.com/dhruvasagar/vim-table-mode.git
+[submodule "tabular"]
+	path = pack/user/opt/tabular
+	url = ssh://git@github.comgodlygeek/tabular.git
+[submodule "graphql"]
+	path = pack/filetype/start/graphql
+	url = ssh://git@github.com/jparise/vim-graphql.git
+[submodule "jsx"]
+	path = pack/filetype/start/jsx
+	url = ssh://git@github.com/mxw/vim-jsx.git
+[submodule "toml"]
+	path = pack/filetype/start/toml
+	url = ssh://git@github.comcespare/vim-toml.git
+[submodule "pandoc-syntax"]
+	path = pack/filetype/start/pandoc-syntax
+	url = ssh://git@github.com/vim-pandoc/vim-pandoc-syntax.git
+[submodule "dracula"]
+	path = pack/themes/opt/dracula
+	url = ssh://git@github.com/dracula/vim.git
+[submodule "solarized"]
+	path = pack/themes/opt/solarized
+	url = ssh://git@github.com/altercation/vim-colors-solarized.git
+[submodule "nodejs"]
+	path = pack/programming/opt/node
+	url = ssh://git@github.com/moll/vim-node
+[submodule "go"]
+	path = pack/programming/start/go
+	url = ssh://git@github.com/fatih/vim-go.git
+[submodule "rockstar"]
+	path = pack/filetype/opt/rockstar
+	url = ssh://git@github.com/sirosen/vim-rockstar.git
