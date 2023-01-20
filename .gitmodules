@@ -6,10 +6,10 @@
 	url = ssh://git@github.com/editorconfig/editorconfig-vim.git
 [submodule "commentary"]
 	path = pack/user/start/commentary
-	url = ssh://git@github.comtpope/vim-commentary.git
+	url = ssh://git@github.com/tpope/vim-commentary.git
 [submodule "surround"]
 	path = pack/user/start/surround
-	url = ssh://git@github.comtpope/vim-surround.git
+	url = ssh://git@github.com/tpope/vim-surround.git
 [submodule "table-mode"]
 	path = pack/user/opt/table-mode
 	url = ssh://git@github.com/dhruvasagar/vim-table-mode.git
@@ -24,7 +24,7 @@
 	url = ssh://git@github.com/mxw/vim-jsx.git
 [submodule "toml"]
 	path = pack/filetype/start/toml
-	url = ssh://git@github.comcespare/vim-toml.git
+	url = ssh://git@github.com/cespare/vim-toml.git
 [submodule "pandoc-syntax"]
 	path = pack/filetype/start/pandoc-syntax
 	url = ssh://git@github.com/vim-pandoc/vim-pandoc-syntax.git
@@ -47,17 +47,11 @@
 	path = pack/user/start/matchup
 	url = git@github.com:andymass/vim-matchup.git
 [submodule "nerdtree"]
-	path = pack/user/start/nerdtree
+	path = pack/user/opt/nerdtree
 	url = git@github.com:preservim/nerdtree.git
 [submodule "gitgutter"]
 	path = pack/user/start/gitgutter
 	url = git@github.com:airblade/vim-gitgutter.git
-[submodule "dadbod"]
-	path = pack/programming/opt/dadbod
-	url = ssh://git@github.com/tpope/vim-dadbod.git
-[submodule "dadbod-ui"]
-	path = pack/programming/opt/dadbod-ui
-	url = ssh://git@github.com/kristijanhusak/vim-dadbod-ui
 [submodule "javascript"]
 	path = pack/programming/start/javascript
 	url = ssh://git@github.com/pangloss/vim-javascript

@@ -14,18 +14,22 @@ set linebreak list           " soft word wrapping
 set number                   " turn line numbers on
 set ruler                    " show line and column
 set tw=78                    " 80 chars text width
+set scrolloff=4              " show 8 lines around cursor when scrolling
 set lazyredraw               " improve performance
 set title                    " set vim set the terminal window title
 " set clipboard^=unnamed,unnamedplus " set default register to system clipboard
 set grepprg=grep\ -nH\ $*    " set grep call to show filenames and line numbers
 " set showmatch              " briefly jump to matching bracket on insert
+set nohlsearch               " don't highlight all search results
 set incsearch                " show where a search pattern matches as it is typed
 set nospell                  " turn off spellcheck
 set wildmode=list,full       " List all matches without completing, then each full match set wildmenu
-set smartcase                " keep original lower/uppercase when replacing words (when ignorecase is on)
+set ignorecase smartcase     " ignore case unless pattern has uppercase chars
 set noerrorbells             " turns off audible error bell
 " set visualbell             " flashes screen for error bell
 set splitbelow splitright    " open new splits below or to the right
+let g:netrw_liststyle=3      " 0:thin 1:long 2:wide 3:tree
+let g:netrw_list_hide='.*\.swp$'
 
 " {{{ Syntax, Filetypes, Plugins
 filetype on
@@ -33,6 +37,29 @@ filetype plugin on
 filetype plugin indent on
 syntax enable
 " }}}
+
+" {{{ ctags optimization
+set autochdir
+set tags=tags;
+" }}}
+
+" | {{{ Change the default text-search program
+if executable("rg")
+  set grepprg=rg\ --vimgrep\ --no-heading
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+" | }}}
+
+" | {{{ Use rg with fzf.vim
+command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
+
+nnoremap <C-p>a :Rg
+" | }}}
 
 " | {{{ Use the same symbols as TextMate for tabstops and EOLs
 set showbreak=↪\
@@ -80,7 +107,7 @@ map <F5> :setlocal spell! spelllang=en_us<CR>
 autocmd BufWritePre * %s/\s\+$//e
 
 " Don't reformat a block on insert/delete for markdown files (breaks lists)
-autocmd Filetype pandoc,markdown
+autocmd Filetype pandoc,markdown,asciidoc
 			\ setlocal tw=78 formatoptions+=t formatoptions-=a fdls=99 fdl=99
 
 " Set foldmethod for JSON files
@@ -88,6 +115,12 @@ autocmd Filetype json setlocal foldmethod=syntax fdls=2 fdl=2
 
 " Set foldmethod for Go files
 autocmd Filetype go setlocal foldmethod=syntax fdls=2 fdl=2
+
+" Highlight section MARKs
+augroup sectionMarks
+	autocmd Syntax * call g:MarkSections()
+	highlight sectionLine ctermbg=darkgray ctermfg=white guibg=darkgray guifg=white
+augroup END
 
 " Don't write backup file if vim is being called by "crontab -e"
 au BufWrite /private/tmp/crontab.* set nowritebackup
@@ -162,6 +195,20 @@ endfunction
 com! DiffSaved call s:DiffWithSaved()
 " | }}}
 
+" | {{{ Highlight sections MARKs
+function! g:MarkSections()
+	if !empty(&commentstring)
+		let b:sectionMarkPattern = substitute(&commentstring, '%s', '\s*\(MARK\|SECTION\):', '')
+		let b:sectionLinePattern = '`^' .. b:sectionMarkPattern .. '.*`'
+		let b:sectionFoldStart = '`^' .. b:sectionMarkPattern .. '.*$\zs`'
+		let b:sectionFoldEnd = '`\ze\(^' .. b:sectionMarkPattern .. '.*\)\|\%$`'
+		execute 'syntax match sectionMark `^' .. b:sectionMarkPattern .. '` transparent contained conceal cchar=§'
+		execute 'syntax match sectionLine ' .. b:sectionLinePattern .. ' contains=sectionMark transparent fold'
+		execute 'syntax region sectionFold start=' .. b:sectionFoldStart .. ' end=' .. b:sectionFoldEnd .. ' transparent fold'
+	endif
+endfunction
+" | }}}
+
 " | {{{ Draw box around text
 function! g:PutInBox(eChar = '#', bWidth = 80, margin = 1) range abort
 	" TODO: re-draw box if it's already drawn
@@ -211,7 +258,7 @@ if !exists("javascript_opts_loaded")
 		autocmd!
 		autocmd FileType javascript setlocal
 					\ foldmethod=syntax foldlevelstart=2 foldlevel=2
-		autocmd filetype javascript setlocal conceallevel=1
+		autocmd FileType javascript setlocal conceallevel=1
 		\ | let g:javascript_plugin_jsdoc                      = 1
 		\ | let g:javascript_conceal_function                  = "ƒ"
 		\ | let g:javascript_conceal_null                      = "ø"
