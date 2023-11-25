@@ -157,6 +157,8 @@ function! g:MatchTermBG()
 		set background=light
 	elseif !empty($TERM_BG_DARK) || $TERM_BG ==? "dark"
 		set background=dark
+	else " default to dark background because we're civilized
+		set background=dark
 	endif
 endfunction
 " | }}}
