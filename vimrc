@@ -114,13 +114,22 @@ autocmd Filetype pandoc,markdown,asciidoc
 autocmd Filetype json setlocal foldmethod=syntax fdls=2 fdl=2
 
 " Set foldmethod for Go files
-autocmd Filetype go setlocal foldmethod=syntax fdls=2 fdl=2
+augroup userGoSettings
+	autocmd Filetype go setlocal foldmethod=syntax fdls=3 fdl=3 |
+				\ syn cluster goCommentGroup add=sectionMark,sectionLine |
+				\ call g:MarkSections()
+augroup END
+
+" Kubernetes files
+augroup userK8sSettings
+	autocmd BufNewFile,BufReadPost *.k8s setlocal filetype=yaml
+augroup END
 
 " Highlight section MARKs
-augroup sectionMarks
-	autocmd Syntax * call g:MarkSections()
-	highlight sectionLine ctermbg=darkgray ctermfg=white guibg=darkgray guifg=white
-augroup END
+" augroup sectionMarks
+" 	autocmd Syntax * call g:MarkSections()
+" 	highlight sectionLine ctermbg=darkgray ctermfg=white guibg=darkgray guifg=white
+" augroup END
 
 " Don't write backup file if vim is being called by "crontab -e"
 au BufWrite /private/tmp/crontab.* set nowritebackup

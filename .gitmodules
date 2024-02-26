@@ -73,3 +73,6 @@
 [submodule "jsdoc"]
 	path = pack/programming/start/jsdoc
 	url = ssh://git@github.com/heavenshell/vim-jsdoc.git
+[submodule "pack/programming/opt/typescript"]
+	path = pack/programming/opt/tsx
+	url = git@github.com:peitalin/vim-jsx-typescript.git

@@ -2,11 +2,11 @@
 # Assign owners to file patterns by GitHub username or e-mail
 # ref: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-*                @parkhub
-.github/**       @parkhub/devops
-Makefile         @parkhub/devops
-*Dockerfile      @parkhub/devops
-docker-compose*  @parkhub/devops
-codefresh.yml    @parkhub/devops
+*               @parkhub
+.github/**      @parkhub/devops
+Makefile        @parkhub/devops
+*Dockerfile     @parkhub/devops
+docker-compose* @parkhub/devops
+codefresh.yaml  @parkhub/devops
 
 # vim: ft=conf
