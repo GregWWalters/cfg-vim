@@ -76,3 +76,6 @@
 [submodule "pack/programming/opt/typescript"]
 	path = pack/programming/opt/tsx
 	url = git@github.com:peitalin/vim-jsx-typescript.git
+[submodule "pack/filetype/start/json"]
+	path = pack/filetype/start/json
+	url = git@github.com:elzr/vim-json.git
